@@ -1,12 +1,10 @@
 package com.jhonjto.mobiletechtest.ui.detail
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import com.google.android.material.snackbar.Snackbar
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import com.jhonjto.mobiletechtest.R
 import com.jhonjto.mobiletechtest.databinding.ActivityDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,30 +16,24 @@ class DetailActivity : AppCompatActivity() {
         const val COMMENT = "DetailActivity:comment"
     }
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
+    private val viewModel: DetailViewModel by viewModels()
     private lateinit var binding: ActivityDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
-
-        val navController = findNavController(R.id.nav_host_fragment_content_detail)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
-
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
+        viewModel.model.observe(this, Observer(::updateUi))
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_detail)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
+    private fun updateUi(model: DetailViewModel.UiModel) = with(binding) {
+        val commentsItem = model.commentsItem
+        commentTitle.text = commentsItem.title
+        commentBody.text = commentsItem.body
+        commentBody.setComment(commentsItem)
+
+        val icon = if (commentsItem.favorite) R.drawable.ic_favorite_on else R.drawable.ic_favorite_off
+        movieDetailFavorite.setImageDrawable(ContextCompat.getDrawable(this@DetailActivity, icon))
     }
 }

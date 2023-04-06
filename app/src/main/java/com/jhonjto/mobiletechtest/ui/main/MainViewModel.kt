@@ -31,7 +31,7 @@ class MainViewModel @Inject constructor(private val getPopularComments: GetPopul
     }
 
     private fun refresh() {
-        _model.value = UiModel.Loading
+        _model.value = UiModel.RequestComments
     }
 
     fun onCallComments() {
