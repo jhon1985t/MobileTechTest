@@ -1,6 +1,6 @@
 package com.jhonjto.mobiletechtest.data.database
 
-import com.jhonjto.data.source.LocalDataSource
+import com.jhonjto.data.source.source.LocalDataSource
 import com.jhonjto.domain.CommentsItem
 import com.jhonjto.mobiletechtest.data.toRoomComments
 import com.jhonjto.mobiletechtest.data.toDomainCommentsItem

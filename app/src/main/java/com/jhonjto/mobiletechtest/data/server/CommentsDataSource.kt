@@ -1,6 +1,6 @@
 package com.jhonjto.mobiletechtest.data.server
 
-import com.jhonjto.data.source.RemoteDataSource
+import com.jhonjto.data.source.source.RemoteDataSource
 import com.jhonjto.domain.CommentsItem
 import com.jhonjto.mobiletechtest.data.toDomainComments
 
@@ -12,7 +12,8 @@ class CommentsDataSource: RemoteDataSource {
                 it.toDomainComments()
             } }
 
-    override suspend fun getCommentsItem(): CommentsItem {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getCommentsItem(id: Int): CommentsItem =
+        JSONPlaceHolder.service
+            .listCommentItem(id)
+            .toDomainComments()
 }
