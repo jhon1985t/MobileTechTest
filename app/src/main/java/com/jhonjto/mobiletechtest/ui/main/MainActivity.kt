@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         adapter = CommentsAdapter(viewModel::onCommentClicked)
         binding.recycler.adapter = adapter
         viewModel.model.observe(this, Observer(::updateUi))
+        
     }
 
     private fun updateUi(model: UiModel) {
