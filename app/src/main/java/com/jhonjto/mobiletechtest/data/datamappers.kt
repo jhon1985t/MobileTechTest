@@ -11,7 +11,7 @@ fun CommentsResultResponseItem.toDomainComments(): CommentsItem = CommentsItem (
     id,
     title,
     userId,
-    favorite = false
+    false
 )
 
 fun PostCommentsResponseItem.toDomainPostComments(): PostCommentsItem = PostCommentsItem (
@@ -27,7 +27,7 @@ fun CommentsItem.toRoomComments(): RoomComments = RoomComments (
     id,
     title,
     userId,
-    favorite = false
+    favorite
 )
 
 fun RoomComments.toDomainCommentsItem(): CommentsItem = CommentsItem (
@@ -35,5 +35,5 @@ fun RoomComments.toDomainCommentsItem(): CommentsItem = CommentsItem (
     id,
     title,
     userId,
-    favorite = false
+    favorite
 )

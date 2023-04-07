@@ -27,14 +27,13 @@ class MainActivity : AppCompatActivity() {
         adapter = CommentsAdapter(viewModel::onCommentClicked)
         binding.recycler.adapter = adapter
         viewModel.model.observe(this, Observer(::updateUi))
-
     }
 
     private fun updateUi(model: UiModel) {
         binding.progress.visibility = if (model is UiModel.Loading) View.VISIBLE else View.GONE
 
         when (model) {
-            is UiModel.Content -> adapter.commentsItem = model.commentsItems
+            is UiModel.Content -> adapter.setData(model.commentsItems)
             is UiModel.Navigation -> startActivity<DetailActivity> {
                 putExtra(DetailActivity.COMMENT, model.commentsItem.id)
             }
@@ -43,5 +42,10 @@ class MainActivity : AppCompatActivity() {
                 Exception()
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.model.observe(this, Observer(::updateUi))
     }
 }

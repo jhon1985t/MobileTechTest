@@ -33,11 +33,11 @@ inline fun <VH : RecyclerView.ViewHolder, T> RecyclerView.Adapter<VH>.basicDiffU
 ) =
     Delegates.observable(initialValue) { _, old, new ->
         DiffUtil.calculateDiff(object : DiffUtil.Callback() {
-            override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
-                areItemsTheSame(old[oldItemPosition], new[newItemPosition])
-
             override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
                 areContentsTheSame(old[oldItemPosition], new[newItemPosition])
+
+            override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
+                areItemsTheSame(old[oldItemPosition], new[newItemPosition])
 
             override fun getOldListSize(): Int = old.size
 

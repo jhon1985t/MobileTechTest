@@ -1,21 +1,25 @@
 package com.jhonjto.mobiletechtest.ui.main
 
+import android.annotation.SuppressLint
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.jhonjto.domain.CommentsItem
 import com.jhonjto.mobiletechtest.R
 import com.jhonjto.mobiletechtest.databinding.ViewCommentBinding
-import com.jhonjto.mobiletechtest.ui.common.basicDiffUtil
 import com.jhonjto.mobiletechtest.ui.common.inflate
 
 class CommentsAdapter(private val listener: (CommentsItem) -> Unit) :
     RecyclerView.Adapter<CommentsAdapter.ViewHolder>() {
 
-    var commentsItem: List<CommentsItem> by basicDiffUtil(
+    private var commentsItem = emptyList<CommentsItem>()
+
+    /*var commentsItem: List<CommentsItem> by basicDiffUtil(
         emptyList(),
-        areItemsTheSame = { old, new -> old.id == new.id }
-    )
+        areItemsTheSame = { old, new -> old.id == new.id },
+        areContentsTheSame = { old, new -> old.favorite == new.favorite }
+    )*/
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = parent.inflate(R.layout.view_comment, false)
@@ -33,8 +37,25 @@ class CommentsAdapter(private val listener: (CommentsItem) -> Unit) :
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ViewCommentBinding.bind(view)
         fun bind(commentsItem: CommentsItem) = with(binding) {
-            tvTitle.text = commentsItem.title
-            tvBody.text = commentsItem.body
+            if (commentsItem.favorite) {
+                tvTitle.text = commentsItem.title
+                tvBody.text = commentsItem.body
+                ivFavorite.visibility = View.VISIBLE
+            } else {
+                tvTitle.text = commentsItem.title
+                tvBody.text = commentsItem.body
+                ivFavorite.visibility = View.GONE
+            }
         }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun setData(newData: List<CommentsItem>) {
+        val artistsDiffUtil = CommentsFavoritesDiffUtil(commentsItem, newData)
+        val diffUtilResult = DiffUtil.calculateDiff(artistsDiffUtil)
+        commentsItem = emptyList()
+        commentsItem = newData
+        diffUtilResult.dispatchUpdatesTo(this)
+        this.notifyDataSetChanged()
     }
 }

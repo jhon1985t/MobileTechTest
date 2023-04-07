@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -19,21 +19,39 @@
         android:padding="8dp"
         android:lines="2"
         android:minLines="2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:autoSizeTextType="uniform"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse"
         tools:text="@tools:sample/lorem" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvBody"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:background="@color/colorPrimaryDark"
-        android:padding="8dp"
-        android:lines="2"
-        android:minLines="2"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse"
-        tools:text="@tools:sample/lorem" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
 
-</LinearLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="@color/colorPrimaryDark"
+            android:padding="8dp"
+            android:lines="2"
+            android:minLines="2"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse"
+            tools:text="@tools:sample/lorem" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivFavorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:src="@drawable/ic_favorite_on" />
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

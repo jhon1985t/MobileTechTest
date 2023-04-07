@@ -5,7 +5,7 @@ import androidx.room.*
 @Dao
 interface CommentsDao {
 
-    @Query("SELECT * FROM RoomComments")
+    @Query("SELECT * FROM RoomComments ORDER BY (favorite is true) DESC")
     fun getAll(): List<RoomComments>
 
     @Query("SELECT * FROM RoomComments WHERE id = :id")
