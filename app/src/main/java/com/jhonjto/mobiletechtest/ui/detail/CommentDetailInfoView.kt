@@ -6,6 +6,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import com.jhonjto.domain.CommentsItem
+import com.jhonjto.domain.PostCommentsItem
 
 class CommentDetailInfoView @JvmOverloads constructor(
     context: Context,
@@ -13,11 +14,14 @@ class CommentDetailInfoView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : AppCompatTextView(context, attrs, defStyleAttr) {
 
-    fun setComment(commentsItem: CommentsItem) = with(commentsItem) {
+    fun setPostComment(postCommentsItem: PostCommentsItem) = with(postCommentsItem) {
         text = buildSpannedString {
 
-            bold { append("Title: ") }
-            appendLine(title)
+            bold { append("Email: ") }
+            appendLine(email)
+
+            bold { append("Name: ") }
+            appendLine(name)
 
             bold { append("Body: ") }
             appendLine(body)

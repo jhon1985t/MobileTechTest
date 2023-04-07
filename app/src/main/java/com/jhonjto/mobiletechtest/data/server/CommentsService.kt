@@ -9,4 +9,7 @@ interface CommentsService {
 
     @GET("posts/{id}")
     suspend fun listCommentItem(@Path("id") searchById: Int): CommentsResultResponseItem
+
+    @GET("posts/{postId}/comments")
+    suspend fun listCommentsByPostId(@Path("postId") postId: Int): PostCommentsResponse
 }

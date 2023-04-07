@@ -1,8 +1,10 @@
 package com.jhonjto.mobiletechtest.data
 
 import com.jhonjto.domain.CommentsItem
+import com.jhonjto.domain.PostCommentsItem
 import com.jhonjto.mobiletechtest.data.database.RoomComments
 import com.jhonjto.mobiletechtest.data.server.CommentsResultResponseItem
+import com.jhonjto.mobiletechtest.data.server.PostCommentsResponseItem
 
 fun CommentsResultResponseItem.toDomainComments(): CommentsItem = CommentsItem (
     body,
@@ -12,7 +14,15 @@ fun CommentsResultResponseItem.toDomainComments(): CommentsItem = CommentsItem (
     favorite = false
 )
 
-fun CommentsItem.toRoomComments(): RoomComments = RoomComments(
+fun PostCommentsResponseItem.toDomainPostComments(): PostCommentsItem = PostCommentsItem (
+    body,
+    email,
+    id,
+    name,
+    postId
+)
+
+fun CommentsItem.toRoomComments(): RoomComments = RoomComments (
     body,
     id,
     title,
@@ -20,7 +30,7 @@ fun CommentsItem.toRoomComments(): RoomComments = RoomComments(
     favorite = false
 )
 
-fun RoomComments.toDomainCommentsItem(): CommentsItem = CommentsItem(
+fun RoomComments.toDomainCommentsItem(): CommentsItem = CommentsItem (
     body,
     id,
     title,

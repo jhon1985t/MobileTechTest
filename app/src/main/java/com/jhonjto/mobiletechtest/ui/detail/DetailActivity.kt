@@ -25,15 +25,23 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         viewModel.model.observe(this, Observer(::updateUi))
+        viewModel.modelPost.observe(this, Observer(::updatePostComments))
+
+        binding.commentDetailFavorite.setOnClickListener { viewModel.onFavoriteClicked() }
     }
 
     private fun updateUi(model: DetailViewModel.UiModel) = with(binding) {
         val commentsItem = model.commentsItem
         commentTitle.text = commentsItem.title
         commentBody.text = commentsItem.body
-        commentBody.setComment(commentsItem)
 
         val icon = if (commentsItem.favorite) R.drawable.ic_favorite_on else R.drawable.ic_favorite_off
-        movieDetailFavorite.setImageDrawable(ContextCompat.getDrawable(this@DetailActivity, icon))
+        commentDetailFavorite.setImageDrawable(ContextCompat.getDrawable(this@DetailActivity, icon))
+    }
+
+    private fun updatePostComments(model: DetailViewModel.UiPostComments) = with(binding) {
+        val postCommentsItem = model.postCommentsItem
+
+
     }
 }

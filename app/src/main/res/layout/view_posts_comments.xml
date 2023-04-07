@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="2dp"
+    android:foreground="?attr/selectableItemBackground">
+
+    <com.jhonjto.mobiletechtest.ui.detail.CommentDetailInfoView
+        android:id="@+id/commentDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:background="@color/lightBackground"
+        android:lineSpacingMultiplier="1.5"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        tools:text="Lorem ipsum" />
+
+</LinearLayout>

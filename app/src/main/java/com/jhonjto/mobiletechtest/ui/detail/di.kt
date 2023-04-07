@@ -3,6 +3,7 @@ package com.jhonjto.mobiletechtest.ui.detail
 import androidx.lifecycle.SavedStateHandle
 import com.jhonjto.data.source.repository.CommentsRepository
 import com.jhonjto.usecases.FindCommentById
+import com.jhonjto.usecases.GetPostCommentsByPostId
 import com.jhonjto.usecases.ToggleCommentFavorite
 import dagger.Module
 import dagger.Provides
@@ -16,7 +17,12 @@ import javax.inject.Named
 class DetailActivityModule {
 
     @Provides
-    fun findMovieByIdProvider(commentsRepository: CommentsRepository) = FindCommentById(commentsRepository)
+    fun findCommentByIdProvider(commentsRepository: CommentsRepository) =
+        FindCommentById(commentsRepository)
+
+    @Provides
+    fun findCommentByPostIdProvider(commentsRepository: CommentsRepository) =
+        GetPostCommentsByPostId(commentsRepository)
 
     @Provides
     fun toggleCommentFavoriteProvider(commentsRepository: CommentsRepository) =

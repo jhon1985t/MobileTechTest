@@ -3,6 +3,7 @@ package com.jhonjto.data.source.repository
 import com.jhonjto.data.source.source.LocalDataSource
 import com.jhonjto.data.source.source.RemoteDataSource
 import com.jhonjto.domain.CommentsItem
+import com.jhonjto.domain.PostCommentsItem
 
 class CommentsRepository(
     private val localDataSource: LocalDataSource,
@@ -23,4 +24,7 @@ class CommentsRepository(
     suspend fun findById(id: Int): CommentsItem = localDataSource.findById(id)
 
     suspend fun update(commentsItem: CommentsItem) = localDataSource.update(commentsItem)
+
+    suspend fun getPostComments(postId: Int): List<PostCommentsItem> =
+        remoteDataSource.getPostComments(postId)
 }
