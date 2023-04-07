@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.jhonjto.domain.PostCommentsItem
 import com.jhonjto.mobiletechtest.R
-import com.jhonjto.mobiletechtest.databinding.ViewCommentBinding
+import com.jhonjto.mobiletechtest.databinding.ViewPostsCommentsBinding
 import com.jhonjto.mobiletechtest.ui.common.basicDiffUtil
 import com.jhonjto.mobiletechtest.ui.common.inflate
 
@@ -29,7 +29,7 @@ class PostCommentsAdapter : RecyclerView.Adapter<PostCommentsAdapter.ViewHolder>
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val binding = ViewCommentBinding.bind(view)
+        private val binding = ViewPostsCommentsBinding.bind(view)
         fun bind(postCommentsItem: PostCommentsItem) = with(binding) {
             commentDescription.text = postCommentsItem.email
             commentDescription.text = postCommentsItem.name

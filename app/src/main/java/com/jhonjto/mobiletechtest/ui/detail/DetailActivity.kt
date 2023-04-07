@@ -18,11 +18,15 @@ class DetailActivity : AppCompatActivity() {
 
     private val viewModel: DetailViewModel by viewModels()
     private lateinit var binding: ActivityDetailBinding
+    private lateinit var adapter: PostCommentsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        adapter = PostCommentsAdapter()
+        binding.recycler.adapter = adapter
 
         viewModel.model.observe(this, Observer(::updateUi))
         viewModel.modelPost.observe(this, Observer(::updatePostComments))
@@ -42,6 +46,6 @@ class DetailActivity : AppCompatActivity() {
     private fun updatePostComments(model: DetailViewModel.UiPostComments) = with(binding) {
         val postCommentsItem = model.postCommentsItem
 
-
+        adapter.postCommentsItem = postCommentsItem
     }
 }

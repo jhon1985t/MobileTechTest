@@ -5,7 +5,6 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
-import com.jhonjto.domain.CommentsItem
 import com.jhonjto.domain.PostCommentsItem
 
 class CommentDetailInfoView @JvmOverloads constructor(
