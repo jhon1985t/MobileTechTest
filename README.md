@@ -40,6 +40,9 @@ Clone the project from github, once cloned, use a smart device or emulator, run 
 Main View = load all the comments, with an option to delete all the comments that are not favorites
 Detail View = load a particular comment, with option to save as favorite, option to delete the current comment
 
+CI/CD
+--------------------
+
 General architecture
 --------------------
 
