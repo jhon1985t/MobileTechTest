@@ -43,6 +43,8 @@ Detail View = load a particular comment, with option to save as favorite, option
 CI/CD
 --------------------
 
+Added CI/CD with Github/Actions
+
 General architecture
 --------------------
 
