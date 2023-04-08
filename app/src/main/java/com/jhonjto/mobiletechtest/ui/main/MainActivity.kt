@@ -1,5 +1,6 @@
 package com.jhonjto.mobiletechtest.ui.main
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -26,7 +27,6 @@ class MainActivity : AppCompatActivity() {
 
         adapter = CommentsAdapter(viewModel::onCommentClicked)
         binding.recycler.adapter = adapter
-        viewModel.model.observe(this, Observer(::updateUi))
     }
 
     private fun updateUi(model: UiModel) {
@@ -44,8 +44,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onResume() {
         super.onResume()
         viewModel.model.observe(this, Observer(::updateUi))
+        adapter.notifyDataSetChanged()
     }
 }

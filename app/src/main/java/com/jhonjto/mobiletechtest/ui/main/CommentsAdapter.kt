@@ -15,12 +15,6 @@ class CommentsAdapter(private val listener: (CommentsItem) -> Unit) :
 
     private var commentsItem = emptyList<CommentsItem>()
 
-    /*var commentsItem: List<CommentsItem> by basicDiffUtil(
-        emptyList(),
-        areItemsTheSame = { old, new -> old.id == new.id },
-        areContentsTheSame = { old, new -> old.favorite == new.favorite }
-    )*/
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = parent.inflate(R.layout.view_comment, false)
         return ViewHolder(view)

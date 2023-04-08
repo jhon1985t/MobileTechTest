@@ -25,6 +25,8 @@ class CommentsRepository(
 
     suspend fun update(commentsItem: CommentsItem) = localDataSource.update(commentsItem)
 
+    suspend fun deleteById(id: Int) = localDataSource.deleteById(id)
+
     suspend fun getPostComments(postId: Int): List<PostCommentsItem> =
         remoteDataSource.getPostComments(postId)
 }

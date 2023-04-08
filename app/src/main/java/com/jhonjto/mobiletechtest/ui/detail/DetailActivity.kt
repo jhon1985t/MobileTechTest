@@ -7,6 +7,8 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.jhonjto.mobiletechtest.R
 import com.jhonjto.mobiletechtest.databinding.ActivityDetailBinding
+import com.jhonjto.mobiletechtest.ui.common.startActivity
+import com.jhonjto.mobiletechtest.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,7 +33,14 @@ class DetailActivity : AppCompatActivity() {
         viewModel.model.observe(this, Observer(::updateUi))
         viewModel.modelPost.observe(this, Observer(::updatePostComments))
 
-        binding.commentDetailFavorite.setOnClickListener { viewModel.onFavoriteClicked() }
+        binding.commentDetailFavorite.setOnClickListener {
+            viewModel.onFavoriteClicked()
+            startActivity<MainActivity> { }
+        }
+        binding.deleteComment.setOnClickListener {
+            viewModel.onDeleteClicked()
+            startActivity<MainActivity> { }
+        }
     }
 
     private fun updateUi(model: DetailViewModel.UiModel) = with(binding) {

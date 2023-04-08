@@ -2,6 +2,7 @@ package com.jhonjto.mobiletechtest.ui.detail
 
 import androidx.lifecycle.SavedStateHandle
 import com.jhonjto.data.source.repository.CommentsRepository
+import com.jhonjto.usecases.DeleteCommentsById
 import com.jhonjto.usecases.FindCommentById
 import com.jhonjto.usecases.GetPostCommentsByPostId
 import com.jhonjto.usecases.ToggleCommentFavorite
@@ -27,6 +28,10 @@ class DetailActivityModule {
     @Provides
     fun toggleCommentFavoriteProvider(commentsRepository: CommentsRepository) =
         ToggleCommentFavorite(commentsRepository)
+
+    @Provides
+    fun deleteCommentByIdProvider(commentsRepository: CommentsRepository) =
+        DeleteCommentsById(commentsRepository)
 
     @Provides
     @Named("id")
