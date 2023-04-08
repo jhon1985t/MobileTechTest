@@ -27,6 +27,8 @@ class CommentsRepository(
 
     suspend fun deleteById(id: Int) = localDataSource.deleteById(id)
 
+    suspend fun deleteAll(favorite: Boolean) = localDataSource.deleteAll(favorite)
+
     suspend fun getPostComments(postId: Int): List<PostCommentsItem> =
         remoteDataSource.getPostComments(postId)
 }

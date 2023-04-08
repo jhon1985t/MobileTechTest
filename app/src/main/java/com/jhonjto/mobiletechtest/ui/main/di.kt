@@ -1,6 +1,7 @@
 package com.jhonjto.mobiletechtest.ui.main
 
 import com.jhonjto.data.source.repository.CommentsRepository
+import com.jhonjto.usecases.DeleteAllComments
 import com.jhonjto.usecases.GetPopularComments
 import dagger.Module
 import dagger.Provides
@@ -16,4 +17,9 @@ class MainActivityModule {
     @ViewModelScoped
     fun getPopularCommentsProvider(commentsRepository: CommentsRepository) =
         GetPopularComments(commentsRepository)
+
+    @Provides
+    @ViewModelScoped
+    fun deleteAllCommentsProvider(commentsRepository: CommentsRepository) =
+        DeleteAllComments(commentsRepository)
 }

@@ -43,8 +43,9 @@ class RoomDataSource(db: CommentsDatabase): LocalDataSource {
             commentsDao.deleteByUserId(id)
         }
 
-    override suspend fun deleteAll(favorite: Boolean): Unit =
+    override suspend fun deleteAll(favorite: Boolean) {
         withContext(Dispatchers.IO) {
             commentsDao.deleteAll(favorite)
         }
+    }
 }

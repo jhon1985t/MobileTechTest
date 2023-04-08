@@ -27,6 +27,10 @@ class MainActivity : AppCompatActivity() {
 
         adapter = CommentsAdapter(viewModel::onCommentClicked)
         binding.recycler.adapter = adapter
+        binding.fabDeleteAll.setOnClickListener {
+            viewModel.onDeleteAllClicked()
+            startActivity<MainActivity> {  }
+        }
     }
 
     private fun updateUi(model: UiModel) {

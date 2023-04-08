@@ -4,13 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.jhonjto.domain.CommentsItem
 import com.jhonjto.mobiletechtest.ui.common.ScopedViewModel
+import com.jhonjto.usecases.DeleteAllComments
 import com.jhonjto.usecases.GetPopularComments
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val getPopularComments: GetPopularComments) : ScopedViewModel() {
+class MainViewModel @Inject constructor(
+    private val getPopularComments: GetPopularComments,
+    private val deleteAllComments: DeleteAllComments
+    ) : ScopedViewModel() {
 
     private val _model = MutableLiveData<UiModel>()
     val model: LiveData<UiModel>
@@ -19,6 +23,14 @@ class MainViewModel @Inject constructor(private val getPopularComments: GetPopul
             return _model
         }
 
+    private val _modelDelete = MutableLiveData<UiDelete>()
+    val modelDelete: LiveData<UiDelete>
+        get() {
+            if (_modelDelete.value == null) onDeleteAllClicked()
+            return _modelDelete
+        }
+
+    class UiDelete(invoke: Unit)
     sealed class UiModel {
         object Loading: UiModel()
         class Content(val commentsItems: List<CommentsItem>): UiModel()
@@ -43,6 +55,10 @@ class MainViewModel @Inject constructor(private val getPopularComments: GetPopul
 
     fun onCommentClicked(commentsItem: CommentsItem) {
         _model.value = UiModel.Navigation(commentsItem)
+    }
+
+    fun onDeleteAllClicked() = launch {
+        _modelDelete.value = UiDelete(deleteAllComments.invoke())
     }
 
     override fun onCleared() {
